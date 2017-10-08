@@ -147,7 +147,7 @@ function webpackTask(minify, styles) {
             output: {
                 path: path.join(__dirname, "dist"),
                 filename: fileName,
-                library: ["agGrid"],
+                library: ["jbDropDown"],
                 libraryTarget: "umd"
             },
             //devtool: 'inline-source-map',
