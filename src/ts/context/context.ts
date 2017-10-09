@@ -1,5 +1,6 @@
 import {Utils as _} from "../utils";
 import {ILogger} from "../iLogger";
+import {Component} from '../widgets/component';
 
 export interface ContextParams {
     seed: any,
