@@ -4,6 +4,8 @@ import {Logger, LoggerFactory} from "./logger";
 import {EventService} from "./eventService";
 import {Events} from './eventKeys';
 import {DropDownReadyEvent} from './events';
+import {Environment} from './environment';
+import {DropDownApi} from './dropdownApi';
 
 export interface DropDownParams {
     // used by Web Components
@@ -38,21 +40,19 @@ export class DropDown {
         // }
 
         let seed = {
-            //enterprise: enterprise,
             dropDownOptions: dropDownOptions,
             eDropDownDiv: eDropDownDiv,
             $scope: params ? params.$scope : null,
             $compile: params ? params.$compile : null,
             quickFilterOnScope: params ? params.quickFilterOnScope : null,
             globalEventListener: params ? params.globalEventListener : null,
-            //frameworkFactory: frameworkFactory
         };
 
         let contextParams = <ContextParams>{
             // overrideBeans: overrideBeans,
              seed: seed,
             // //Careful with the order of the beans here, there are dependencies between them that need to be kept
-            // beans: [rowModelClass, PaginationAutoPageSizeService, GridApi, ComponentProvider, AgComponentUtils, ComponentMetadataProvider,
+             beans: [/*rowModelClass, PaginationAutoPageSizeService,*/ DropDownApi, /*ComponentProvider, AgComponentUtils, ComponentMetadataProvider,*/
             //     ComponentProvider, ComponentResolver, ComponentRecipes, NamedComponentResolver,
             //     CellRendererFactory, HorizontalDragService, HeaderTemplateLoader, PinnedRowModel, DragService,
             //     DisplayedGroupCreator, EventService, GridOptionsWrapper, SelectionController,
@@ -64,7 +64,8 @@ export class DropDown {
             //     CellNavigationService, FilterStage, SortStage, FlattenStage, FilterService, RowNodeFactory,
             //     CellEditorFactory, CellRendererService, ValueFormatterService, StylingService, ScrollVisibleService,
             //     ColumnHoverService, ColumnAnimationService, SortService, AutoGroupColService, ImmutableService,
-            //     ChangeDetectionService, Environment, Beans, AnimationFrameService, SortController],
+                   /*ChangeDetectionService,*/ Environment, /*Beans, AnimationFrameService, SortController*/
+            ],
             // components: [
             //     {componentName: 'AgCheckbox', theClass: AgCheckbox}
             // ],

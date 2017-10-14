@@ -2,6 +2,10 @@ export interface IAfterGuiAttachedParams {
     eComponent: HTMLElement;
 }
 
+export interface IFilterAfterGuiAttachedParams extends IAfterGuiAttachedParams {
+    hidePopup: () => void;
+}
+
 export interface IComponent<T, Z extends IAfterGuiAttachedParams> {
     
         /** Return the DOM element of your editor, this is what the grid puts into the DOM */
