@@ -25,7 +25,7 @@ export class SetFilterListItem extends Component {
         private selected: boolean = true;
     
         private value: any;
-        private column: Column;
+        //private column: Column;
     
         private eCheckedIcon: HTMLElement;
         private eUncheckedIcon: HTMLElement;
@@ -33,7 +33,7 @@ export class SetFilterListItem extends Component {
         constructor(value: any, column: Column) {
             super(SetFilterListItem.TEMPLATE);
             this.value = value;
-            this.column = column;
+            //this.column = column;
     
         }
     
@@ -52,6 +52,7 @@ export class SetFilterListItem extends Component {
                 this.selected = !this.selected;
                 this.updateCheckboxIcon();
                 let event: SelectedEvent = {
+                    api: null,
                     type: SetFilterListItem.EVENT_SELECTED
                 };
                 return this.dispatchEvent(event);

@@ -66,7 +66,7 @@ export interface IFilterParams {
     filterChangedCallback: ()=> void;
     filterModifiedCallback: ()=> void;
     valueGetter: (/*rowNode: RowNode*/) => any;
-    //doesRowPassOtherFilter: (rowNode: RowNode) => boolean;
+    doesRowPassOtherFilter: (/*rowNode: RowNode*/) => boolean;
     context: any;
     $scope: any;
     filterOptions?: string[];

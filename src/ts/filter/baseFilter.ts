@@ -1,6 +1,7 @@
 import {Component} from '../widgets/component';
 import {IFilterParams, IDoesFilterPassParams} from '../interfaces/iFilter';
 import {QuerySelector} from '../widgets/componentAnnotations';
+import {Context, Autowired} from '../context/context';
 
 export interface Comparator<T>{
     (left:T, right:T):number
@@ -45,6 +46,18 @@ export abstract class BaseFilter<T, P extends IFilterParams, M> extends Componen
     applyActive: boolean;
     defaultFilter:string;
     filter:string;
+
+    @QuerySelector('#applyPanel')
+    private eButtonsPanel: HTMLElement;
+
+    @QuerySelector('#applyButton')
+    private eApplyButton: HTMLElement;
+
+    @QuerySelector('#clearButton')
+    private eClearButton: HTMLElement;
+
+    @Autowired('context')
+    public context: Context;
 
     public init(params: P): void {
         this.filterParams = params;
