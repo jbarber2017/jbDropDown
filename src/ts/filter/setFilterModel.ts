@@ -1,6 +1,7 @@
-import {Utils} from '../utils';
+import {Utils as _} from "../utils";
 import {ISetFilterParams} from '../interfaces/iSetFilterParams';
 import {TextFilter, TextFormatter} from './textFilter';
+import {IFilterParams} from "../interfaces/iFilter";
 
 const NULL_VALUE = '___NULL___';
 
@@ -26,16 +27,16 @@ export class SetFilterModel {
     
         private doesRowPassOtherFilters: any;
     
-        constructor(/*colDef: ColDef,*/ rowModel: any, valueGetter: any, doesRowPassOtherFilters: any, suppressSorting: boolean) {
+        constructor(/*colDef: ColDef, rowModel: any,*/ filterParams: IFilterParams, valueGetter: any, doesRowPassOtherFilters: any, suppressSorting: boolean) {
             this.suppressSorting = suppressSorting;
             //this.colDef = colDef;
-            this.rowModel = rowModel;
+            //this.rowModel = rowModel;
             this.valueGetter = valueGetter;
             this.doesRowPassOtherFilters = doesRowPassOtherFilters;
     
-            this.filterParams = this.colDef.filterParams ? <ISetFilterParams> this.colDef.filterParams : <ISetFilterParams>{};
-            if (Utils.exists(this.filterParams)) {
-                this.usingProvidedSet = Utils.exists(this.filterParams.values);
+            this.filterParams = <ISetFilterParams>filterParams;//this.colDef.filterParams ? <ISetFilterParams> this.colDef.filterParams : <ISetFilterParams>{};
+            if (_.exists(this.filterParams)) {
+                this.usingProvidedSet = _.exists(this.filterParams.values);
                 this.showingAvailableOnly = this.filterParams.suppressRemoveEntries!==true;
             } else {
                 this.usingProvidedSet = false;
@@ -115,10 +116,10 @@ export class SetFilterModel {
         private extractValuesToUse() {
             let valuesToUse: string[];
             if (this.usingProvidedSet) {
-                valuesToUse = Utils.toStrings(this.filterParams.values);
+                valuesToUse = _.toStrings(this.filterParams.values);
             } else {
                 let uniqueValuesAsAnyObjects = this.getUniqueValues(false);
-                valuesToUse = Utils.toStrings(uniqueValuesAsAnyObjects);
+                valuesToUse = _.toStrings(uniqueValuesAsAnyObjects);
             }
             return valuesToUse;
         }
@@ -131,17 +132,19 @@ export class SetFilterModel {
             }
     
             let uniqueValuesAsAnyObjects = this.getUniqueValues(true);
-            this.availableUniqueValues = Utils.toStrings(uniqueValuesAsAnyObjects);
+            this.availableUniqueValues = _.toStrings(uniqueValuesAsAnyObjects);
             this.sortValues(this.availableUniqueValues);
         }
     
         private sortValues(values: any[]): void {
             if (this.filterParams && this.filterParams.comparator) {
                 values.sort(this.filterParams.comparator);
-            } else if (this.colDef.comparator) {
-                values.sort(this.colDef.comparator);
-            } else {
-                values.sort(Utils.defaultComparator);
+            } 
+            // else if (this.colDef.comparator) {
+            //     values.sort(this.colDef.comparator);
+            // } 
+            else {
+                values.sort(_.defaultComparator);
             }
         }
     
@@ -158,9 +161,9 @@ export class SetFilterModel {
                 if (!node.group) {
                     let value = this.valueGetter(node);
     
-                    if (this.colDef.keyCreator) {
-                        value = this.colDef.keyCreator( {value: value} );
-                    }
+                    // if (this.colDef.keyCreator) {
+                    //     value = this.colDef.keyCreator( {value: value} );
+                    // }
     
                     if (value === "" || value === undefined) {
                         value = null;
@@ -194,7 +197,7 @@ export class SetFilterModel {
     
         //sets mini filter. returns true if it changed from last value, otherwise false
         public setMiniFilter(newMiniFilter: any) {
-            newMiniFilter = Utils.makeNull(newMiniFilter);
+            newMiniFilter = _.makeNull(newMiniFilter);
             if (this.miniFilter === newMiniFilter) {
                 //do nothing if filter has not changed
                 return false;
@@ -335,7 +338,7 @@ export class SetFilterModel {
                 return null;
             }
             let selectedValues:string[] = [];
-            Utils.iterateObject(this.selectedValuesMap, (key: string) => {
+            _.iterateObject(this.selectedValuesMap, (key: string) => {
                 let value = this.keyToValue(key);
                 selectedValues.push(value);
             });

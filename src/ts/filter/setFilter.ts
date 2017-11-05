@@ -7,7 +7,7 @@ import {QuerySelector} from '../widgets/componentAnnotations';
 import {Context} from '../context/context';
 import {Component} from '../widgets/component';
 import {VirtualList, VirtualListModel} from '../rendering/virtualList';
-import {Utils} from '../utils';
+import {Utils as _} from "../utils";
 
 export class SetFilter extends BaseFilter<string, ISetFilterParams, string[]> {
     private model: SetFilterModel;
@@ -39,12 +39,12 @@ export class SetFilter extends BaseFilter<string, ISetFilterParams, string[]> {
             this.onFilterChanged();
         };
         let debounceMs: number = this.filterParams && this.filterParams.debounceMs != null ? this.filterParams.debounceMs : 0;
-        this.debounceFilterChanged = Utils.debounce(changeFilter, debounceMs);
+        this.debounceFilterChanged = _.debounce(changeFilter, debounceMs);
 
 
-        this.eCheckedIcon = _.createIconNoSpan('checkboxChecked', this.gridOptionsWrapper, this.filterParams.column);
-        this.eUncheckedIcon = _.createIconNoSpan('checkboxUnchecked', this.gridOptionsWrapper, this.filterParams.column);
-        this.eIndeterminateCheckedIcon = _.createIconNoSpan('checkboxIndeterminate', this.gridOptionsWrapper, this.filterParams.column);
+        this.eCheckedIcon = _.createIconNoSpan('checkboxChecked'/*, this.gridOptionsWrapper, this.filterParams.column*/);
+        this.eUncheckedIcon = _.createIconNoSpan('checkboxUnchecked'/*, this.gridOptionsWrapper, this.filterParams.column*/);
+        this.eIndeterminateCheckedIcon = _.createIconNoSpan('checkboxIndeterminate'/*, this.gridOptionsWrapper, this.filterParams.column*/);
 
     }
 
@@ -69,7 +69,7 @@ export class SetFilter extends BaseFilter<string, ISetFilterParams, string[]> {
         this.virtualList = new VirtualList();
         this.context.wireBean(this.virtualList);
         this.getHtmlElement().querySelector('#richList').appendChild(this.virtualList.getHtmlElement());
-        if (Utils.exists(this.filterParams.cellHeight)) {
+        if (_.exists(this.filterParams.cellHeight)) {
             this.virtualList.setRowHeight(this.filterParams.cellHeight);
         }
 
@@ -99,7 +99,7 @@ export class SetFilter extends BaseFilter<string, ISetFilterParams, string[]> {
 
     private createSetListItem(value: any): Component {
 
-        let listItem = new SetFilterListItem(value, this.filterParams.column);
+        let listItem = new SetFilterListItem(value/*, this.filterParams.column*/);
         this.context.wireBean(listItem);
         listItem.setSelected(this.model.isValueSelected(value));
 
@@ -136,7 +136,7 @@ export class SetFilter extends BaseFilter<string, ISetFilterParams, string[]> {
         if (this.filterParams.colDef.keyCreator) {
             value = this.filterParams.colDef.keyCreator( {value: value} );
         }
-        value = Utils.makeNull(value);
+        value = _.makeNull(value);
 
         if (Array.isArray(value)) {
             for (let i = 0; i < value.length; i++) {
@@ -228,7 +228,7 @@ export class SetFilter extends BaseFilter<string, ISetFilterParams, string[]> {
     }
 
     private onSelectAll(event: Event) {
-        Utils.addAgGridEventPath(event);
+        _.addAgGridEventPath(event);
         this.eSelectAll.checked = !this.eSelectAll.checked;
         let checked = this.eSelectAll.checked;
         if (checked) {

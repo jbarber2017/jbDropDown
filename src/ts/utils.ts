@@ -1,5 +1,10 @@
 export class Utils {
-
+    private static isSafari: boolean;
+    private static isIE: boolean;
+    private static isEdge: boolean;
+    private static isChrome: boolean;
+    private static isFirefox: boolean;
+    
     static exists(value: any): boolean {
         if (value === null || value === undefined || value === '') {
             return false;
@@ -140,6 +145,57 @@ export class Utils {
         return result;
     }
 
+    static setVisible(element: HTMLElement, visible: boolean) {
+        this.addOrRemoveCssClass(element, 'ag-hidden', !visible);
+    }
+
+    static setHidden(element: HTMLElement, hidden: boolean) {
+        this.addOrRemoveCssClass(element, 'ag-visibility-hidden', hidden);
+    }
+
+    static isBrowserIE(): boolean {
+        if (this.isIE === undefined) {
+            this.isIE = /*@cc_on!@*/false || !!(<any>document).documentMode; // At least IE6
+        }
+        return this.isIE;
+    }
+
+    static isBrowserEdge(): boolean {
+        if (this.isEdge === undefined) {
+            this.isEdge = !this.isBrowserIE() && !!(<any>window).StyleMedia;
+        }
+        return this.isEdge;
+    }
+
+    static isBrowserSafari(): boolean {
+        if (this.isSafari === undefined) {
+            let anyWindow = <any> window;
+            // taken from https://github.com/ag-grid/ag-grid/issues/550
+            this.isSafari = Object.prototype.toString.call(anyWindow.HTMLElement).indexOf('Constructor') > 0
+                || (function (p) {
+                    return p.toString() === "[object SafariRemoteNotification]";
+                })
+                (!anyWindow.safari || anyWindow.safari.pushNotification);
+        }
+        return this.isSafari;
+    }
+
+    static isBrowserChrome(): boolean {
+        if (this.isChrome === undefined) {
+            let anyWindow = <any> window;
+            this.isChrome = !!anyWindow.chrome && !!anyWindow.chrome.webstore;
+        }
+        return this.isChrome;
+    }
+
+    static isBrowserFirefox(): boolean {
+        if (this.isFirefox === undefined) {
+            let anyWindow = <any> window;
+            this.isFirefox = typeof anyWindow.InstallTrigger !== 'undefined';
+        }
+        return this.isFirefox;
+    }
+
     static isVisible(element: HTMLElement) {
         return (element.offsetParent !== null);
     }
@@ -159,13 +215,13 @@ export class Utils {
         return false;
     }
 
-    static createIconNoSpan(iconName: string, gridOptionsWrapper: GridOptionsWrapper): HTMLElement {
+    static createIconNoSpan(iconName: string/*, gridOptionsWrapper: GridOptionsWrapper*/): HTMLElement {
         let userProvidedIcon: Function | string;
         // check col for icon first
         // it not in col, try grid options
-        if (!userProvidedIcon && gridOptionsWrapper.getIcons()) {
-            userProvidedIcon = gridOptionsWrapper.getIcons()[iconName];
-        }
+        // if (!userProvidedIcon && gridOptionsWrapper.getIcons()) {
+        //     userProvidedIcon = gridOptionsWrapper.getIcons()[iconName];
+        // }
         // now if user provided, use it
         if (userProvidedIcon) {
             let rendererResult: any;

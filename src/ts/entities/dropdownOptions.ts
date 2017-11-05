@@ -1,7 +1,15 @@
 import {DropDownApi} from '../dropdownApi'
 
 export interface DropDownOptions {
+    showSelectAllPanel?: boolean;
+    showSearchPanel?: boolean;
+    showApplyPanel?: boolean;
+    showCheckSelection?: boolean;
+    //dropDownMode?: DropdownMode;
+    buttonText?: string;
+    items: any[];
     api?: DropDownApi;
+    onDropDownReady?(event?: any): void;
 }
 
 export interface PostProcessPopupParams {

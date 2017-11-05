@@ -30,7 +30,7 @@ export class SetFilterListItem extends Component {
         private eCheckedIcon: HTMLElement;
         private eUncheckedIcon: HTMLElement;
     
-        constructor(value: any, column: Column) {
+        constructor(value: any/*, column: Column*/) {
             super(SetFilterListItem.TEMPLATE);
             this.value = value;
             //this.column = column;
@@ -39,8 +39,8 @@ export class SetFilterListItem extends Component {
     
         @PostConstruct
         private init(): void {
-            this.eCheckedIcon = _.createIconNoSpan('checkboxChecked', this.gridOptionsWrapper, this.column);
-            this.eUncheckedIcon = _.createIconNoSpan('checkboxUnchecked', this.gridOptionsWrapper, this.column);
+            this.eCheckedIcon = _.createIconNoSpan('checkboxChecked'/*, this.gridOptionsWrapper, this.column*/);
+            this.eUncheckedIcon = _.createIconNoSpan('checkboxUnchecked'/*, this.gridOptionsWrapper, this.column*/);
             this.eCheckbox = this.queryForHtmlElement(".ag-filter-checkbox");
             this.eClickableArea = this.getHtmlElement();
     

@@ -4,6 +4,7 @@ import {Bean, Autowired} from "../context/context";
 import {DropDownCore} from "../dropdownCore";
 //import {GridOptionsWrapper} from "../gridOptionsWrapper";
 import {PostProcessPopupParams} from "../entities/dropDownOptions";
+import {Constants} from '../constants';
 // import {RowNode} from "../entities/rowNode";
 // import {Column} from "../entities/column";
 
