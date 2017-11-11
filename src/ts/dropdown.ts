@@ -7,7 +7,7 @@ import {DropDownReadyEvent} from './events';
 import {Environment} from './environment';
 import {DropDownApi} from './dropdownApi';
 import {Beans} from './rendering/beans';
-import {PopupService} from './widgets/popupService';
+//import {PopupService} from './widgets/popupService';
 
 export interface DropDownParams {
     // used by Web Components
@@ -61,7 +61,7 @@ export class DropDown {
             //     FilterManager, ColumnController, PaginationProxy, RowRenderer, HeaderRenderer, ExpressionService,
             //     BalancedColumnTreeBuilder, CsvCreator, Downloader, XmlFactory, GridSerializer, TemplateService,
             //     GridPanel, PopupService, ValueCache, ValueService, AlignedGridsService,
-            /*     LoggerFactory, ColumnUtils, AutoWidthCalculator,*/ PopupService,/*, GridCore, StandardMenuFactory,*/
+            /*     LoggerFactory, ColumnUtils, AutoWidthCalculator, PopupService,, GridCore, StandardMenuFactory,*/
             //     DragAndDropService, ColumnApi, FocusedCellController, MouseEventService,
             //     CellNavigationService, FilterStage, SortStage, FlattenStage, FilterService, RowNodeFactory,
             //     CellEditorFactory, CellRendererService, ValueFormatterService, StylingService, ScrollVisibleService,
