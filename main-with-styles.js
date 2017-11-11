@@ -1,6 +1,6 @@
 var jbDropDown = require('./main');
-Object.keys(agGrid).forEach(function(key) {
-    exports[key] = agGrid[key];
+Object.keys(jbDropDown).forEach(function(key) {
+    exports[key] = jbDropDown[key];
 });
 
 // require('./dist/styles/ag-grid.css');

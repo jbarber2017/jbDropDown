@@ -183,7 +183,7 @@ export {DropDownApi} from "./dist/lib/dropdownApi";
 // export {defaultGroupComparator} from "./dist/lib/functions";
 // export {GridOptionsWrapper} from "./dist/lib/gridOptionsWrapper";
 export {EventService} from "./dist/lib/eventService";
-//export {GridCore} from "./dist/lib/gridCore";
+export {DropDownCore} from "./dist/lib/dropdownCore";
 export {Logger} from "./dist/lib/logger";
 // export {SelectionController} from "./dist/lib/selectionController";
 // export {SortController} from "./dist/lib/sortController";

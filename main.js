@@ -12,6 +12,7 @@ globalObj.HTMLButtonElement = typeof HTMLButtonElement === 'undefined' ? {} : HT
 globalObj.HTMLSelectElement = typeof HTMLSelectElement === 'undefined' ? {} : HTMLSelectElement;
 globalObj.HTMLInputElement = typeof HTMLInputElement === 'undefined' ? {} : HTMLInputElement;
 globalObj.Node = typeof Node === 'undefined' ? {} : Node;
+
 // columnController
 // export {BalancedColumnTreeBuilder} from "./dist/lib/columnController/balancedColumnTreeBuilder";
 // export {ColumnController} from "./dist/lib/columnController/columnController";
@@ -19,12 +20,14 @@ globalObj.Node = typeof Node === 'undefined' ? {} : Node;
 // export {ColumnUtils} from "./dist/lib/columnController/columnUtils";
 // export {DisplayedGroupCreator} from "./dist/lib/columnController/displayedGroupCreator";
 // export {GroupInstanceIdCreator} from "./dist/lib/columnController/groupInstanceIdCreator";
+
 // components
 // export {ComponentUtil} from "./dist/lib/components/componentUtil";
 // export {ColDefUtil} from "./dist/lib/components/colDefUtil";
 // export {ComponentProvider} from "./dist/lib/components/framework/componentProvider";
 // export {initialiseAgGridWithAngular1} from "./dist/lib/components/agGridNg1";
 // export {initialiseAgGridWithWebComponents} from "./dist/lib/components/agGridWebComponent";
+
 // context
 var beanStub_1 = require("./dist/lib/context/beanStub");
 exports.BeanStub = beanStub_1.BeanStub;
@@ -41,10 +44,12 @@ var componentAnnotations_1 = require("./dist/lib/widgets/componentAnnotations");
 exports.QuerySelector = componentAnnotations_1.QuerySelector;
 exports.Listener = componentAnnotations_1.Listener;
 exports.RefSelector = componentAnnotations_1.RefSelector;
+
 // rowControllers/inMemory
 // export {FilterStage} from "./dist/lib/rowModels/inMemory/filterStage";
 // export {FlattenStage} from "./dist/lib/rowModels/inMemory/flattenStage";
 // export {SortStage} from "./dist/lib/rowModels/inMemory/sortStage";
+
 // row models
 // export {PinnedRowModel} from "./dist/lib/rowModels/pinnedRowModel";
 // export {InMemoryRowModel, RowNodeTransaction} from "./dist/lib/rowModels/inMemory/inMemoryRowModel";
@@ -62,17 +67,21 @@ exports.RefSelector = componentAnnotations_1.RefSelector;
 // export {IToolPanel} from "./dist/lib/interfaces/iToolPanel";
 // export {RowNodeCache, RowNodeCacheParams} from "./dist/lib/rowModels/cache/rowNodeCache";
 // export {IGetRowsParams, IDatasource} from "./dist/lib/rowModels/iDatasource";
+
 //styling
 //export {StylingService} from "./dist/lib/styling/stylingService";
+
 // widgets
 //export {AgCheckbox} from "./dist/lib/widgets/agCheckbox";
 var component_1 = require("./dist/lib/widgets/component");
 exports.Component = component_1.Component;
 // export {PopupService} from "./dist/lib/widgets/popupService";
 // export {TouchListener, TapEvent, LongTapEvent} from "./dist/lib/widgets/touchListener";
+
 // range
-// export {RangeSelection, AddRangeSelectionParams} from "./dist/lib/interfaces/iRangeController"
-// export {IRangeController} from "./dist/lib/interfaces/iRangeController"
+// export {RangeSelection, AddRangeSelectionParams} from "./dist/lib/interfaces/iRangeController";
+// export {IRangeController} from "./dist/lib/interfaces/iRangeController";
+
 // root
 // export {BaseFrameworkFactory} from "./dist/lib/baseFrameworkFactory";
 // export {CellNavigationService} from "./dist/lib/cellNavigationService";
@@ -91,7 +100,8 @@ exports.DropDownApi = dropdownApi_1.DropDownApi;
 // export {GridOptionsWrapper} from "./dist/lib/gridOptionsWrapper";
 var eventService_1 = require("./dist/lib/eventService");
 exports.EventService = eventService_1.EventService;
-//export {GridCore} from "./dist/lib/gridCore";
+var dropdownCore_1 = require("./dist/lib/dropdownCore");
+exports.DropDownCore = dropdownCore_1.DropDownCore;
 var logger_1 = require("./dist/lib/logger");
 exports.Logger = logger_1.Logger;
 // export {SelectionController} from "./dist/lib/selectionController";
@@ -126,6 +136,7 @@ exports.LoggerFactory = logger_2.LoggerFactory;
 //export {SerializedNumberFilter} from "./dist/lib/filter/numberFilter";
 var environment_1 = require("./dist/lib/environment");
 exports.Environment = environment_1.Environment;
+
 // events
 // export {AgEvent, AgGridEvent, ModelUpdatedEvent, ColumnPivotModeChangedEvent, VirtualColumnsChangedEvent,
 //     ColumnEverythingChangedEvent, NewColumnsLoadedEvent, GridColumnsChangedEvent, DisplayedColumnsChangedEvent,

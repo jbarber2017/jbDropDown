@@ -10,6 +10,7 @@ export { Constants } from "./dist/lib/constants";
 export { DropDown, DropDownParams } from "./dist/lib/dropdown";
 export { DropDownApi } from "./dist/lib/dropdownApi";
 export { EventService } from "./dist/lib/eventService";
+export { DropDownCore } from "./dist/lib/dropdownCore";
 export { Logger } from "./dist/lib/logger";
 export { Utils, NumberSequence, _ } from "./dist/lib/utils";
 export { ExpressionService } from "./dist/lib/valueService/expressionService";
