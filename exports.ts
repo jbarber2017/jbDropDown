@@ -181,7 +181,7 @@ export {DropDownApi} from "./dist/lib/dropdownApi";
 //export {Events} from "./dist/lib/events";
 // export {FocusedCellController} from "./dist/lib/focusedCellController";
 // export {defaultGroupComparator} from "./dist/lib/functions";
-// export {GridOptionsWrapper} from "./dist/lib/gridOptionsWrapper";
+export {DropDownOptionsWrapper} from "./dist/lib/dropdownOptionsWrapper";
 export {EventService} from "./dist/lib/eventService";
 export {DropDownCore} from "./dist/lib/dropdownCore";
 export {Logger} from "./dist/lib/logger";
@@ -208,22 +208,22 @@ export {LoggerFactory} from "./dist/lib/logger";
 // export {GridCellDef} from "./dist/lib/entities/gridCell"
 // export {ColDef} from "./dist/lib/entities/colDef"
 // export {ProcessCellForExportParams, ProcessHeaderForExportParams} from "./dist/lib/exportParams"
-// export {
-//     GridOptions,
-//     GetContextMenuItemsParams,
-//     GetContextMenuItems,
-//     GetDataPath,
-//     MenuItemDef,
-//     GetNodeChildDetails,
-//     NodeChildDetails,
-//     GetMainMenuItemsParams,
-//     GetMainMenuItems,
-//     GetRowNodeIdFunc,
-//     ProcessRowParams,
-//     NavigateToNextCellParams,
-//     TabToNextCellParams,
-//     PostProcessPopupParams
-// } from "./dist/lib/entities/gridOptions"
+export {
+    DropDownOptions,
+    // GetContextMenuItemsParams,
+    // GetContextMenuItems,
+    // GetDataPath,
+    // MenuItemDef,
+    // GetNodeChildDetails,
+    // NodeChildDetails,
+    // GetMainMenuItemsParams,
+    // GetMainMenuItems,
+    // GetRowNodeIdFunc,
+    // ProcessRowParams,
+    // NavigateToNextCellParams,
+    // TabToNextCellParams,
+    PostProcessPopupParams
+} from "./dist/lib/entities/dropdownOptions";
 // export {OriginalColumnGroupChild} from "./dist/lib/entities/originalColumnGroupChild"
 // export {IViewportDatasource, IViewportDatasourceParams} from "./dist/lib/interfaces/iViewportDatasource"
 // export {IContextMenuFactory} from "./dist/lib/interfaces/iContextMenuFactory"

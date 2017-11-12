@@ -4,7 +4,7 @@ import {Logger, LoggerFactory} from './logger';
 
 @Bean('dropdownCore')
 export class DropDownCore {
-    @Autowired('dropDownOptions') private dropDownOptions: DropDownOptions;
+    @Autowired('dropdownOptions') private dropDownOptions: DropDownOptions;
     @Autowired('eDropDownDiv') private eDropDownDiv: HTMLElement;
 
     private logger: Logger;

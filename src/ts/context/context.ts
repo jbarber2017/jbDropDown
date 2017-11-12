@@ -379,7 +379,7 @@ export function Qualifier(name: string): Function {
                 methodName = methodOrAttributeName;
             } else {
                 props = getOrCreateProps(constructor);
-                methodName = 'jbConstructor';
+                methodName = 'agConstructor';
             }
             if (!props.autowireMethods) {
                 props.autowireMethods = {};
@@ -394,10 +394,10 @@ export function Qualifier(name: string): Function {
 }
 
 function getOrCreateProps(target: any): any {
-    if (!target.hasOwnProperty('__jbBeanMetaData')) {
-        target.__jbBeanMetaData = {};
+    if (!target.hasOwnProperty('__agBeanMetaData')) {
+        target.__agBeanMetaData = {};
     }
 
 
-    return target.__jbBeanMetaData;
+    return target.__agBeanMetaData;
 }
