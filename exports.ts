@@ -21,6 +21,7 @@ globalObj.Node = typeof Node === 'undefined' ? {} : Node;
 // export {initialiseAgGridWithAngular1} from "./dist/lib/components/agGridNg1";
 // export {initialiseAgGridWithWebComponents} from "./dist/lib/components/agGridWebComponent";
 
+
 // context
 export {BeanStub} from "./dist/lib/context/beanStub";
 export {
@@ -132,6 +133,7 @@ export {QuerySelector, Listener, RefSelector} from "./dist/lib/widgets/component
 // export {RowRenderer} from "./dist/lib/rendering/rowRenderer";
 // export {ValueFormatterService} from "./dist/lib/rendering/valueFormatterService";
 export {TextFormatter} from "./dist/lib/filter/textFilter";
+export {DropDownComponent} from './dist/lib/dropDownComponent';
 
 // rowControllers/inMemory
 // export {FilterStage} from "./dist/lib/rowModels/inMemory/filterStage";
@@ -162,8 +164,9 @@ export {TextFormatter} from "./dist/lib/filter/textFilter";
 // widgets
 //export {AgCheckbox} from "./dist/lib/widgets/agCheckbox";
 export {Component} from "./dist/lib/widgets/component";
-// export {PopupService} from "./dist/lib/widgets/popupService";
+export {PopupService} from "./dist/lib/widgets/popupService";
 // export {TouchListener, TapEvent, LongTapEvent} from "./dist/lib/widgets/touchListener";
+
 
 // range
 // export {RangeSelection, AddRangeSelectionParams} from "./dist/lib/interfaces/iRangeController"
@@ -203,7 +206,7 @@ export {LoggerFactory} from "./dist/lib/logger";
 // export {IAggFuncService} from "./dist/lib/interfaces/iAggFuncService"
 // export {IClipboardService} from "./dist/lib/interfaces/iClipboardService"
 // export {IExcelCreator} from "./dist/lib/interfaces/iExcelCreator"
-// export {IMenuFactory} from "./dist/lib/interfaces/iMenuFactory"
+export {IMenuFactory} from "./dist/lib/interfaces/iMenuFactory";
 // export {IAggFunc, ColGroupDef} from "./dist/lib/entities/colDef"
 // export {GridCellDef} from "./dist/lib/entities/gridCell"
 // export {ColDef} from "./dist/lib/entities/colDef"

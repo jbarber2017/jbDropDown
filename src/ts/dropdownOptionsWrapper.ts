@@ -1,6 +1,7 @@
 import {Bean, Autowired, Qualifier, PreDestroy, PostConstruct} from './context/context';
-import {DropDownOptions} from './entities/dropdownOptions';
+import {DropDownOptions,PostProcessPopupParams} from './entities/dropdownOptions';
 import {DropDownApi} from './dropdownApi';
+import {Utils as _} from './utils';
 
 @Bean('dropdownOptionsWrapper')
 export class DropDownOptionsWrapper {
@@ -14,7 +15,7 @@ export class DropDownOptionsWrapper {
 
     @PreDestroy
     private destroy(): void {
-        // need to remove these, as we don't own the lifecycle of the gridOptions, we need to
+        // need to remove these, as we don't own the lifecycle of the dropdownOptions, we need to
         // remove the references in case the user keeps the grid options, we want the rest
         // of the grid to be picked up by the garbage collector
         this.dropdownOptions.api = null;
@@ -43,5 +44,21 @@ export class DropDownOptionsWrapper {
         // if (this.isGroupRemoveSingleChildren() && this.isGroupHideOpenParents()) {
         //     console.warn('ag-Grid: groupRemoveSingleChildren and groupHideOpenParents do not work with each other, you need to pick one. And don\'t ask us how to us these together on our support forum either you will get the same answer!');
         // }
+    }
+
+    public getPostProcessPopupFunc(): (params: PostProcessPopupParams)=>void { return this.dropdownOptions.postProcessPopup; }
+
+    public getDocument(): Document {
+        // if user is providing document, we use the users one,
+        // otherwise we use the document on the global namespace.
+        let result: Document;
+        if (_.exists(this.dropdownOptions.getDocument)) {
+            result = this.dropdownOptions.getDocument();
+        }
+        if (_.exists(result)) {
+            return result;
+        } else {
+            return document;
+        }
     }
 }

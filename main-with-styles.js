@@ -3,7 +3,7 @@ Object.keys(jbDropDown).forEach(function(key) {
     exports[key] = jbDropDown[key];
 });
 
-// require('./dist/styles/ag-grid.css');
+require('./dist/styles/jbDropDown.css');
 // require('./dist/styles/theme-blue.css');
 // require('./dist/styles/theme-dark.css');
 // require('./dist/styles/theme-fresh.css');

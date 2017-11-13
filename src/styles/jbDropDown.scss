@@ -1,0 +1,36 @@
+
+.dropdown-container {
+    margin-right: 20px;
+    height: 20px;
+    white-space: nowrap;
+}
+
+.dropdown-container input {
+    width: calc(100% - 20px);
+    margin: 0;
+    height: 19px;
+}
+
+.dropdown-container button {
+    //sborder: 0;
+    //background: transparent;
+    padding: 3px;
+    margin: 0;
+    height: 25px;
+}
+
+.dropdown-button {
+    margin-top: -25px;
+    display: inline-block;
+    float: right;
+}
+
+.ag-icon-filter {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: transparent url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMSAyaDEwTDcgNnY1TDUgOVY2TDEgMnptNCA0djFoMlY2SDV6IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=) center no-repeat;
+    background-size: 12px 12px;
+    -webkit-filter: "initial";
+    filter: "initial"; 
+}

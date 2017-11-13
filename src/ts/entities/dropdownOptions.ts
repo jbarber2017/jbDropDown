@@ -10,6 +10,8 @@ export interface DropDownOptions {
     items: any[];
     api?: DropDownApi;
     onDropDownReady?(event?: any): void;
+    postProcessPopup?:(params: PostProcessPopupParams)=>void;
+    getDocument?: ()=> Document;
 }
 
 export interface PostProcessPopupParams {

@@ -41,6 +41,8 @@ var componentAnnotations_1 = require("./dist/lib/widgets/componentAnnotations");
 exports.QuerySelector = componentAnnotations_1.QuerySelector;
 exports.Listener = componentAnnotations_1.Listener;
 exports.RefSelector = componentAnnotations_1.RefSelector;
+var dropDownComponent_1 = require("./dist/lib/dropDownComponent");
+exports.DropDownComponent = dropDownComponent_1.DropDownComponent;
 // rowControllers/inMemory
 // export {FilterStage} from "./dist/lib/rowModels/inMemory/filterStage";
 // export {FlattenStage} from "./dist/lib/rowModels/inMemory/flattenStage";
@@ -68,7 +70,8 @@ exports.RefSelector = componentAnnotations_1.RefSelector;
 //export {AgCheckbox} from "./dist/lib/widgets/agCheckbox";
 var component_1 = require("./dist/lib/widgets/component");
 exports.Component = component_1.Component;
-// export {PopupService} from "./dist/lib/widgets/popupService";
+var popupService_1 = require("./dist/lib/widgets/popupService");
+exports.PopupService = popupService_1.PopupService;
 // export {TouchListener, TapEvent, LongTapEvent} from "./dist/lib/widgets/touchListener";
 // range
 // export {RangeSelection, AddRangeSelectionParams} from "./dist/lib/interfaces/iRangeController"
