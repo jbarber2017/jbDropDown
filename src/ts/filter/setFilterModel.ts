@@ -5,6 +5,10 @@ import {IFilterParams} from "../interfaces/iFilter";
 
 const NULL_VALUE = '___NULL___';
 
+export enum SetFilterModelValuesType {
+    PROVIDED_LIST, PROVIDED_CB, NOT_PROVIDED
+}
+
 export class SetFilterModel {
         //private colDef: ColDef;
         private filterParams: ISetFilterParams;
@@ -19,6 +23,7 @@ export class SetFilterModel {
         private selectedValuesMap: any;
         private suppressSorting: boolean;
         private formatter:TextFormatter;
+        private valuesType: SetFilterModelValuesType;
     
         // to make code more readable, we work these out once, and
         // then refer to each time. both are derived from the filterParams
@@ -26,20 +31,38 @@ export class SetFilterModel {
         private usingProvidedSet: boolean;
     
         private doesRowPassOtherFilters: any;
+        private modelUpdatedFunc: (values: string[]) => void;
+        private isLoadingFunc: (loading: boolean) => void;
     
-        constructor(/*colDef: ColDef, rowModel: any,*/ filterParams: IFilterParams, valueGetter: any, doesRowPassOtherFilters: any, suppressSorting: boolean) {
+        constructor(
+            //colDef: ColDef,
+            //rowModel: IRowModel,
+            filterParams: ISetFilterParams,
+            valueGetter: any,
+            doesRowPassOtherFilters: any,
+            suppressSorting: boolean,
+            modelUpdatedFunc: (values:string[])=>void,
+            isLoadingFunc: (loading:boolean)=>void
+        ) {
             this.suppressSorting = suppressSorting;
             //this.colDef = colDef;
-            //this.rowModel = rowModel;
             this.valueGetter = valueGetter;
             this.doesRowPassOtherFilters = doesRowPassOtherFilters;
+            this.modelUpdatedFunc = modelUpdatedFunc;
+            this.isLoadingFunc = isLoadingFunc;
     
-            this.filterParams = <ISetFilterParams>filterParams;//this.colDef.filterParams ? <ISetFilterParams> this.colDef.filterParams : <ISetFilterParams>{};
-            if (_.exists(this.filterParams)) {
-                this.usingProvidedSet = _.exists(this.filterParams.values);
+            // if (rowModel.getType()===Constants.ROW_MODEL_TYPE_IN_MEMORY) {
+            //     this.inMemoryRowModel = <InMemoryRowModel> rowModel;
+            // }
+    
+            //this.filterParams = this.colDef.filterParams ? <ISetFilterParams> this.colDef.filterParams : <ISetFilterParams>{};
+            if (_.exists(this.filterParams) && _.exists(this.filterParams.values)) {
+                this.valuesType =  Array.isArray(this.filterParams.values)?
+                                            SetFilterModelValuesType.PROVIDED_LIST :
+                                            SetFilterModelValuesType.PROVIDED_CB;
                 this.showingAvailableOnly = this.filterParams.suppressRemoveEntries!==true;
             } else {
-                this.usingProvidedSet = false;
+                this.valuesType = SetFilterModelValuesType.NOT_PROVIDED;
                 this.showingAvailableOnly = true;
             }
     
@@ -56,8 +79,7 @@ export class SetFilterModel {
             this.selectedValuesMap = {};
             this.selectEverything();
             this.formatter = this.filterParams.textFormatter ? this.filterParams.textFormatter : TextFilter.DEFAULT_FORMATTER;
-        }
-    
+        }    
     
         // if keepSelection not set will always select all filters
         // if keepSelection set will keep current state of selected filters
@@ -88,6 +110,10 @@ export class SetFilterModel {
             } else {
                 this.selectEverything();
             }
+        }
+
+        public setValuesType(value:SetFilterModelValuesType){
+            this.valuesType = value;
         }
     
         public refreshAfterAnyFilterChanged() {

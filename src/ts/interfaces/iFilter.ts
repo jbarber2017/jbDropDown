@@ -48,7 +48,7 @@ export interface SerializedFilter {
     filterType: string;
 }
 
-export interface IFilterComp extends IFilter, IComponent<IFilterParams, IFilterAfterGuiAttachedParams> {
+export interface IFilterComp extends IFilter, IComponent<IFilterParams> {
 }
 
 export interface IDoesFilterPassParams {

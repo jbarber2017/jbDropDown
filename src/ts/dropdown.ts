@@ -10,6 +10,13 @@ import {DropDownCore} from './dropdownCore';
 import {Beans} from './rendering/beans';
 import {DropDownOptionsWrapper} from './dropdownOptionsWrapper';
 import {PopupService} from './widgets/popupService';
+import {MenuFactory} from './menu/menuFactory';
+import {ComponentProvider} from './components/framework/componentProvider';
+import {AgComponentUtils} from './components/framework/agComponentUtils';
+import {ComponentMetadataProvider} from './components/framework/componentMetadataProvider';
+import { ComponentResolver } from './components/framework/componentResolver';
+import {NamedComponentResolver} from './components/framework/namedComponentResolver';
+import {FilterManager} from './filter/filterManager';
 
 export interface DropDownParams {
     // used by Web Components
@@ -56,14 +63,14 @@ export class DropDown {
             // overrideBeans: overrideBeans,
              seed: seed,
             // //Careful with the order of the beans here, there are dependencies between them that need to be kept
-             beans: [/*rowModelClass, PaginationAutoPageSizeService,*/ DropDownApi, /*ComponentProvider, AgComponentUtils, ComponentMetadataProvider,*/
-            //     ComponentProvider, ComponentResolver, ComponentRecipes, NamedComponentResolver,
+             beans: [/*rowModelClass, PaginationAutoPageSizeService,*/ DropDownApi, ComponentProvider, AgComponentUtils, ComponentMetadataProvider,
+                 ComponentProvider, ComponentResolver, /*ComponentRecipes,*/ NamedComponentResolver,
             //     CellRendererFactory, HorizontalDragService, HeaderTemplateLoader, PinnedRowModel, DragService,
             /*     DisplayedGroupCreator,*/ EventService,DropDownOptionsWrapper, /*SelectionController,*/
-            //     FilterManager, ColumnController, PaginationProxy, RowRenderer, HeaderRenderer, ExpressionService,
+                   FilterManager, /*ColumnController, PaginationProxy, RowRenderer, HeaderRenderer, ExpressionService,*/
             //     BalancedColumnTreeBuilder, CsvCreator, Downloader, XmlFactory, GridSerializer, TemplateService,
             /*     GridPanel,*/ PopupService, /*ValueCache, ValueService, AlignedGridsService,*/
-                   LoggerFactory, /*ColumnUtils, AutoWidthCalculator, PopupService,*/ DropDownCore,/* StandardMenuFactory,*/
+                   LoggerFactory, /*ColumnUtils, AutoWidthCalculator, PopupService,*/ DropDownCore, MenuFactory, /* StandardMenuFactory,*/
             //     DragAndDropService, ColumnApi, FocusedCellController, MouseEventService,
             //     CellNavigationService, FilterStage, SortStage, FlattenStage, FilterService, RowNodeFactory,
             //     CellEditorFactory, CellRendererService, ValueFormatterService, StylingService, ScrollVisibleService,

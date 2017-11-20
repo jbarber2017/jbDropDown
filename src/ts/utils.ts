@@ -44,6 +44,26 @@ export class Utils {
         }
     }
 
+    static assign(object: any, ...sources: any[]): any {
+        sources.forEach(source => {
+            if (this.exists(source)) {
+                this.iterateObject(source, function (key: string, value: any) {
+                    object[key] = value;
+                });
+            }
+        });
+
+        return object;
+    }
+
+    static removeAllChildren(node: HTMLElement) {
+        if (node) {
+            while (node.hasChildNodes()) {
+                node.removeChild(node.lastChild);
+            }
+        }
+    }
+
     static removeFromArray<T>(array: T[], object: T) {
         if (array.indexOf(object) >= 0) {
             array.splice(array.indexOf(object), 1);
@@ -456,31 +476,138 @@ export class Utils {
             }
         }
     }
+
+    static mergeDeep(dest: any, source: any): void {
+
+        if (this.exists(source)) {
+            this.iterateObject(source, (key: string, newValue: any) => {
+
+                let oldValue: any = dest[key];
+
+                if (oldValue === newValue) { return; }
+
+                if (typeof oldValue === 'object' && typeof newValue === 'object') {
+                    Utils.mergeDeep(oldValue, newValue);
+                } else {
+                    dest[key] = newValue;
+                }
+            });
+        }
+    }
 }
 
 export class NumberSequence {
+    private nextValue: number;
+    private step: number;
+
+    constructor(initValue = 0, step = 1) {
+        this.nextValue = initValue;
+        this.step = step;
+    }
+
+    public next(): number {
+        let valToReturn = this.nextValue;
+        this.nextValue += this.step;
+        return valToReturn;
+    }
+
+    public peek(): number {
+        return this.nextValue;
+    }
+
+    public skip(count: number): void {
+        this.nextValue += count;
+    }
+}
     
-        private nextValue: number;
-        private step: number;
-    
-        constructor(initValue = 0, step = 1) {
-            this.nextValue = initValue;
-            this.step = step;
-        }
-    
-        public next(): number {
-            let valToReturn = this.nextValue;
-            this.nextValue += this.step;
-            return valToReturn;
-        }
-    
-        public peek(): number {
-            return this.nextValue;
-        }
-    
-        public skip(count: number): void {
-            this.nextValue += count;
+export let _ = Utils;
+
+export type ResolveAndRejectCallback<T> = (resolve:(value:T)=>void, reject:(params:any)=>void)=>void;
+
+export enum PromiseStatus {
+    IN_PROGRESS, RESOLVED
+}
+
+export interface ExternalPromise<T> {
+    resolve:(value:T)=>void,
+    promise:Promise<T>
+}
+
+export class Promise<T> {
+    private status:PromiseStatus = PromiseStatus.IN_PROGRESS;
+    private resolution:T = null;
+    private listOfWaiters: ((value:T)=>void)[] = [];
+
+
+    static all<T> (toCombine:Promise<T>[]): Promise<T[]>{
+        return new Promise(resolve=>{
+            let combinedValues:T[] = [];
+            let remainingToResolve:number = toCombine.length;
+            toCombine.forEach((source, index)=> {
+                source.then(sourceResolved=>{
+                    remainingToResolve --;
+                    combinedValues[index] = sourceResolved;
+                    if (remainingToResolve == 0){
+                        resolve(combinedValues);
+                    }
+                });
+                combinedValues.push(null);
+            });
+        });
+    }
+
+    static resolve<T> (value:T): Promise<T>{
+        return new Promise<T>(resolve=>resolve(value));
+    }
+
+    static external<T> ():ExternalPromise<T>{
+        let capture: (value:T)=> void;
+        let promise:Promise<T> = new Promise<T>((resolve)=>{
+            capture = resolve
+        });
+        return <ExternalPromise<T>>{
+            promise: promise,
+            resolve: (value:T):void => {
+                capture(value)
+            }
+        };
+    }
+
+    constructor (
+        callback:ResolveAndRejectCallback<T>
+    ){
+        callback(this.onDone.bind(this), this.onReject.bind(this))
+    }
+
+    public then(func: (result: any)=>void) {
+        if (this.status === PromiseStatus.IN_PROGRESS){
+            this.listOfWaiters.push(func);
+        } else {
+            func(this.resolution);
         }
     }
-    
-    export let _ = Utils;
+
+    public map<Z> (adapter:(from:T)=>Z):Promise<Z>{
+        return new Promise<Z>((resolve)=>{
+            this.then(unmapped=>{
+                resolve(adapter(unmapped))
+            })
+        });
+    }
+
+    public resolveNow<Z> (ifNotResolvedValue:Z, ifResolved:(current:T)=>Z):Z{
+        if (this.status == PromiseStatus.IN_PROGRESS) return ifNotResolvedValue;
+
+        return ifResolved(this.resolution);
+    }
+
+    private onDone (value:T):void {
+        this.status = PromiseStatus.RESOLVED;
+        this.resolution = value;
+        this.listOfWaiters.forEach(waiter=>waiter(value));
+    }
+
+    private onReject (params:any):void {
+        console.warn('TBI');
+    }
+}

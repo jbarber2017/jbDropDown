@@ -17,7 +17,7 @@ globalObj.Node = typeof Node === 'undefined' ? {} : Node;
 // components
 // export {ComponentUtil} from "./dist/lib/components/componentUtil";
 // export {ColDefUtil} from "./dist/lib/components/colDefUtil";
-// export {ComponentProvider} from "./dist/lib/components/framework/componentProvider";
+export {ComponentProvider} from "./dist/lib/components/framework/componentProvider";
 // export {initialiseAgGridWithAngular1} from "./dist/lib/components/agGridNg1";
 // export {initialiseAgGridWithWebComponents} from "./dist/lib/components/agGridWebComponent";
 
@@ -70,9 +70,10 @@ export {QuerySelector, Listener, RefSelector} from "./dist/lib/widgets/component
 // export {RowNode} from "./dist/lib/entities/rowNode";
 
 // filter
-// export {BaseFilter} from "./dist/lib/filter/baseFilter";
+export {BaseFilter} from "./dist/lib/filter/baseFilter";
 // export {DateFilter} from "./dist/lib/filter/dateFilter";
-// export {FilterManager, FilterWrapper} from "./dist/lib/filter/filterManager";
+export {FilterManager, FilterWrapper} from "./dist/lib/filter/filterManager";
+export {SetFilter} from './dist/lib/filter/setFilter';
 // export {NumberFilter} from "./dist/lib/filter/numberFilter";
 // export {TextFilter,SerializedTextFilter} from "./dist/lib/filter/textFilter";
 // export {IFloatingFilter, IFloatingFilterParams} from "./dist/lib/filter/floatingFilter";
@@ -94,6 +95,7 @@ export {QuerySelector, Listener, RefSelector} from "./dist/lib/widgets/component
 // export {MoveColumnController} from "./dist/lib/headerRendering/moveColumnController";
 // export {RenderedHeaderCell} from "./dist/lib/headerRendering/deprecated/renderedHeaderCell";
 // export {StandardMenuFactory} from "./dist/lib/headerRendering/standardMenu";
+export {MenuFactory} from './dist/lib/menu/menuFactory';
 
 // layout
 // export {BorderLayout} from "./dist/lib/layout/borderLayout";
@@ -246,9 +248,9 @@ export {IFilter, IFilterComp} from "./dist/lib/interfaces/iFilter";
 // export {IHeader} from "./dist/lib/headerRendering/header/headerComp";
 // export {ICellRendererParams} from "./dist/lib/rendering/cellRenderers/iCellRenderer";
 // export {IRichCellEditorParams} from "./dist/lib/interfaces/iRichCellEditorParams";
-// export {WrapableInterface} from "./dist/lib/components/framework/frameworkComponentWrapper";
-// export {BaseComponentWrapper} from "./dist/lib/components/framework/frameworkComponentWrapper";
-// export {FrameworkComponentWrapper} from "./dist/lib/components/framework/frameworkComponentWrapper";
+export {WrapableInterface} from "./dist/lib/components/framework/frameworkComponentWrapper";
+export {BaseComponentWrapper} from "./dist/lib/components/framework/frameworkComponentWrapper";
+export {FrameworkComponentWrapper} from "./dist/lib/components/framework/frameworkComponentWrapper";
 //export {IFrameworkFactory} from "./dist/lib/interfaces/iFrameworkFactory";
 //export {SerializedNumberFilter} from "./dist/lib/filter/numberFilter";
 export {Environment} from "./dist/lib/environment";

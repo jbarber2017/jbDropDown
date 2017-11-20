@@ -2,6 +2,7 @@ import {Component} from '../widgets/component';
 import {IFilterParams, IDoesFilterPassParams} from '../interfaces/iFilter';
 import {QuerySelector} from '../widgets/componentAnnotations';
 import {Context, Autowired} from '../context/context';
+import {Utils as _} from '../utils';
 
 export interface Comparator<T>{
     (left:T, right:T):number
@@ -62,11 +63,44 @@ export abstract class BaseFilter<T, P extends IFilterParams, M> extends Componen
     public init(params: P): void {
         this.filterParams = params;
         this.defaultFilter = this.filterParams.defaultOption;
-        if(this.filterParams.filterOptions) {
-            if(this.filterParams.filterOptions.lastIndexOf(BaseFilter.EQUALS) < 0) {
+        if (this.filterParams.filterOptions){
+            if (this.filterParams.filterOptions.lastIndexOf(BaseFilter.EQUALS)<0){
                 this.defaultFilter = this.filterParams.filterOptions[0];
             }
         }
+        this.customInit();
+        this.filter = this.defaultFilter;
+        this.clearActive = params.clearButton === true;
+        //Allowing for old param property apply, even though is not advertised through the interface
+        this.applyActive = ((params.applyButton === true) || ((<any>params).apply === true));
+        this.newRowsActionKeep = params.newRowsAction === 'keep';
+
+        this.setTemplate(this.generateTemplate());
+
+        _.setVisible(this.eApplyButton, this.applyActive);
+        if (this.applyActive) {
+            this.addDestroyableEventListener(this.eApplyButton, "click", this.filterParams.filterChangedCallback);
+        }
+
+        _.setVisible(this.eClearButton, this.clearActive);
+        if (this.clearActive) {
+            this.addDestroyableEventListener(this.eClearButton, "click", this.onClearButton.bind(this));
+        }
+
+
+        let anyButtonVisible: boolean = this.applyActive || this.clearActive;
+        _.setVisible(this.eButtonsPanel, anyButtonVisible);
+
+
+        this.instantiate(this.context);
+
+        this.initialiseFilterBodyUi();
+        this.refreshFilterBodyUi();
+    }
+
+    public onClearButton (){
+        this.setModel(null);
+        this.onFilterChanged();
     }
 
     public abstract customInit(): void;

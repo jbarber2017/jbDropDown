@@ -61,4 +61,6 @@ export class DropDownOptionsWrapper {
             return document;
         }
     }
+
+    public getContext() { return this.dropdownOptions.context; }
 }

@@ -22,7 +22,8 @@ globalObj.Node = typeof Node === 'undefined' ? {} : Node;
 // components
 // export {ComponentUtil} from "./dist/lib/components/componentUtil";
 // export {ColDefUtil} from "./dist/lib/components/colDefUtil";
-// export {ComponentProvider} from "./dist/lib/components/framework/componentProvider";
+var componentProvider_1 = require("./dist/lib/components/framework/componentProvider");
+exports.ComponentProvider = componentProvider_1.ComponentProvider;
 // export {initialiseAgGridWithAngular1} from "./dist/lib/components/agGridNg1";
 // export {initialiseAgGridWithWebComponents} from "./dist/lib/components/agGridWebComponent";
 // context
@@ -41,6 +42,65 @@ var componentAnnotations_1 = require("./dist/lib/widgets/componentAnnotations");
 exports.QuerySelector = componentAnnotations_1.QuerySelector;
 exports.Listener = componentAnnotations_1.Listener;
 exports.RefSelector = componentAnnotations_1.RefSelector;
+// excel
+// export {
+//     ExcelCell,
+//     ExcelExportParams,
+//     ExcelRow,
+//     ExcelStyle,
+//     ExcelWorksheet,
+//     ExcelBorder,
+//     ExcelColumn,
+//     ExcelData,
+//     ExcelDataType
+// } from "./dist/lib/interfaces/iExcelCreator";
+// dragAndDrop
+// export {
+//     DragAndDropService,
+//     DragSourceType,
+//     HDirection,
+//     VDirection,
+//     DropTarget,
+//     DragSource,
+//     DraggingEvent
+// } from "./dist/lib/dragAndDrop/dragAndDropService";
+// export {DragService} from "./dist/lib/dragAndDrop/dragService";
+// entities
+// export {Column} from "./dist/lib/entities/column";
+// export {ColumnGroup} from "./dist/lib/entities/columnGroup";
+// export {GridCell} from "./dist/lib/entities/gridCell";
+// export {GridRow} from "./dist/lib/entities/gridRow";
+// export {OriginalColumnGroup} from "./dist/lib/entities/originalColumnGroup";
+// export {RowNode} from "./dist/lib/entities/rowNode";
+// filter
+var baseFilter_1 = require("./dist/lib/filter/baseFilter");
+exports.BaseFilter = baseFilter_1.BaseFilter;
+// export {DateFilter} from "./dist/lib/filter/dateFilter";
+var filterManager_1 = require("./dist/lib/filter/filterManager");
+exports.FilterManager = filterManager_1.FilterManager;
+var setFilter_1 = require("./dist/lib/filter/setFilter");
+exports.SetFilter = setFilter_1.SetFilter;
+// export {NumberFilter} from "./dist/lib/filter/numberFilter";
+// export {TextFilter,SerializedTextFilter} from "./dist/lib/filter/textFilter";
+// export {IFloatingFilter, IFloatingFilterParams} from "./dist/lib/filter/floatingFilter";
+// gridPanel
+// export {GridPanel} from "./dist/lib/gridPanel/gridPanel";
+// export {ScrollVisibleService} from "./dist/lib/gridPanel/scrollVisibleService";
+// export {MouseEventService} from "./dist/lib/gridPanel/mouseEventService";
+// headerRendering
+// export {BodyDropPivotTarget} from "./dist/lib/headerRendering/bodyDropPivotTarget";
+// export {BodyDropTarget} from "./dist/lib/headerRendering/bodyDropTarget";
+// export {CssClassApplier} from "./dist/lib/headerRendering/cssClassApplier";
+// export {HeaderContainer} from "./dist/lib/headerRendering/headerContainer";
+// export {HeaderRenderer} from "./dist/lib/headerRendering/headerRenderer";
+// export {HeaderRowComp} from "./dist/lib/headerRendering/headerRowComp";
+// export {HeaderTemplateLoader} from "./dist/lib/headerRendering/deprecated/headerTemplateLoader";
+// export {HorizontalDragService} from "./dist/lib/headerRendering/horizontalDragService";
+// export {MoveColumnController} from "./dist/lib/headerRendering/moveColumnController";
+// export {RenderedHeaderCell} from "./dist/lib/headerRendering/deprecated/renderedHeaderCell";
+// export {StandardMenuFactory} from "./dist/lib/headerRendering/standardMenu";
+var menuFactory_1 = require("./dist/lib/menu/menuFactory");
+exports.MenuFactory = menuFactory_1.MenuFactory;
 var dropDownComponent_1 = require("./dist/lib/dropDownComponent");
 exports.DropDownComponent = dropDownComponent_1.DropDownComponent;
 // rowControllers/inMemory
@@ -115,18 +175,8 @@ exports.ExpressionService = expressionService_1.ExpressionService;
 // export {XmlElement} from "./dist/lib/xmlFactory"
 var logger_2 = require("./dist/lib/logger");
 exports.LoggerFactory = logger_2.LoggerFactory;
-// export {IHeaderParams} from "./dist/lib/headerRendering/header/headerComp";
-// export {GetQuickFilterTextParams} from "./dist/lib/entities/colDef";
-// export {IHeaderGroupParams, IHeaderGroup} from "./dist/lib/headerRendering/headerGroup/headerGroupComp";
-// export {TextAndNumberFilterParameters} from "./dist/lib/filter/textAndNumberFilterParameters";
-// export {IsColumnFunc} from "./dist/lib/entities/colDef";
-// export {ColumnApi} from "./dist/lib/columnController/columnController";
-// export {IHeader} from "./dist/lib/headerRendering/header/headerComp";
-// export {ICellRendererParams} from "./dist/lib/rendering/cellRenderers/iCellRenderer";
-// export {IRichCellEditorParams} from "./dist/lib/interfaces/iRichCellEditorParams";
-// export {WrapableInterface} from "./dist/lib/components/framework/frameworkComponentWrapper";
-// export {BaseComponentWrapper} from "./dist/lib/components/framework/frameworkComponentWrapper";
-// export {FrameworkComponentWrapper} from "./dist/lib/components/framework/frameworkComponentWrapper";
+var frameworkComponentWrapper_1 = require("./dist/lib/components/framework/frameworkComponentWrapper");
+exports.BaseComponentWrapper = frameworkComponentWrapper_1.BaseComponentWrapper;
 //export {IFrameworkFactory} from "./dist/lib/interfaces/iFrameworkFactory";
 //export {SerializedNumberFilter} from "./dist/lib/filter/numberFilter";
 var environment_1 = require("./dist/lib/environment");

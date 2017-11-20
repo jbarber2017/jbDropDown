@@ -1,6 +1,7 @@
 import {DropDownApi} from '../dropdownApi'
 
 export interface DropDownOptions {
+    context?: any;
     showSelectAllPanel?: boolean;
     showSearchPanel?: boolean;
     showApplyPanel?: boolean;

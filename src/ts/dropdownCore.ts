@@ -1,4 +1,4 @@
-import {Bean, Autowired, Qualifier, PostConstruct, PreDestroy} from './context/context';
+import {Bean, Autowired, Qualifier, PostConstruct, PreDestroy, Context} from './context/context';
 import {DropDownOptions} from './entities/dropdownOptions';
 import {EventService} from './eventService';
 import {Logger, LoggerFactory} from './logger';
@@ -12,7 +12,7 @@ export class DropDownCore {
     @Autowired('dropdownOptions') private dropDownOptions: DropDownOptions;
     @Autowired('eventService') private eventService: EventService;
     @Autowired('eDropDownDiv') private eDropDownDiv: HTMLElement;
-    @QuerySelector('.eButtonShowMainFilter') eButtonShowMainFilter: HTMLElement;
+    @Autowired('context') private context: Context;
 
     private destroyFunctions: Function[] = [];
     private finished: boolean;
@@ -40,6 +40,7 @@ export class DropDownCore {
         // let base:HTMLElement = _.loadTemplate(`<div class="dropdown-content" aria-hidden="true"><div class="dropdown-container" aria-hidden="true"></div></div>`);
         // this.enrichBody(base);
         var c = new DropDownComponent();
+        this.context.wireBean(c);
         //var t = c.getGui().toString();
         this.eRootPanel = <HTMLElement>c.getGui(); //_.loadTemplate(c.getGui());
         //var t = this.eRootPanel.querySelector('.eButtonShowMainFilter');
