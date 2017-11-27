@@ -1,3 +1,53 @@
+$icons-path: './icons/' !default;
+$ag-icons-filter: 'initial' !default;
+
+@mixin icon-background($icon) {
+    width: 12px;
+    height: 12px;
+    background: transparent url('#{$icons-path}#{$icon}.svg') center no-repeat;
+    background-size: 12px 12px;
+    filter: $ag-icons-filter;
+}
+
+/* icons are used outside of the grid root (in the ghost) */
+$icons: checkbox-checked-readonly checkbox-checked checkbox-indeterminate-readonly checkbox-indeterminate checkbox-unchecked-readonly checkbox-unchecked;
+@each $icon in $icons {
+    .ag-icon-#{$icon} {
+        display: inline-block;
+        @include icon-background('#{$icon}');
+    }
+}
+
+.ag-virtual-list-item {
+    position: absolute;
+    width: 100%;
+
+    span:empty:not(.ag-icon) {
+        border-left: 1px solid transparent;
+    }
+}
+
+.ag-virtual-list-viewport {
+    overflow-x: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.ag-virtual-list-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.ag-set-filter-item {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ag-filter label {
+    display: block;
+    padding-left: 4px;
+}
 
 .dropdown-container {
     margin-right: 20px;
@@ -33,4 +83,96 @@
     background-size: 12px 12px;
     -webkit-filter: "initial";
     filter: "initial"; 
+}
+
+.ag-menu {
+    border: 1px solid #9bc2e6;
+    background-color: #f6f6f6;
+}
+
+.ag-menu {
+    background: #f6f6f6;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 4px;
+    padding: 0;
+    z-index: 5;
+}
+
+.ag-menu .ag-menu-option {
+    line-height: 16px;
+    padding-left: 8px;
+    padding-right: 8px; 
+}
+
+.ag-menu .ag-menu-option > span {
+    display: table-cell;
+    vertical-align: middle; 
+}
+
+.ag-filter-select {
+    margin: 4px;
+    width: calc(100% - 8px); 
+}
+
+.ag-menu .ag-menu-list {
+    cursor: default;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    width: 100%; 
+}
+
+.ag-filter .ag-filter-header-container {
+    height: 24px;
+}
+
+.ag-filter-header-container {
+    padding: 2px 4px 2px 4px;
+    border-bottom: 1px solid #d3d3d3; 
+}
+
+.ag-filter-header-container > label {
+    margin-bottom: 0; 
+}
+
+.ag-filter-checkbox {
+    margin-right: 4px;
+    margin-bottom: 0;
+    display: inline-block; 
+}
+
+.ag-filter-header-container {
+    padding: 2px 4px 2px 4px;
+    border-bottom: 1px solid #d3d3d3; 
+}
+
+.ag-filter-apply-panel {
+    border-top: 1px solid #d3d3d3;
+    padding: 2px 0px 2px 4px; 
+}
+
+.ag-tab-body {
+    padding: 4px 0; 
+}
+
+.ag-tab-body .ag-filter-select {
+    margin: 4px;
+    width: calc(100% - 8px);
+ }
+
+.ag-tab-body .ag-menu-list {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.ag-tab-body .ag-menu-list > div:first-child > span {
+    padding-top: 0; 
+}
+
+.ag-tab-body .ag-menu-list > div:last-child > span {
+    padding-bottom: 0;
+}
+
+.ag-tab-body .ag-menu-list > div:last-child > .ag-menu-option-popup-pointer {
+    background-position-y: 0;
 }

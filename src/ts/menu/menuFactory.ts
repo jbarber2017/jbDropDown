@@ -112,9 +112,9 @@ export class Menu {
     
     @PostConstruct
     public init(): void {
-        this.createPanel();
+        let item = this.createPanel();
         this.layout = new FilterLayout({
-            item: null,
+            item: item,
             cssClass: 'ag-menu',
             onActiveItemClicked: this.onHidePopup.bind(this)
         });
@@ -155,7 +155,7 @@ export class Menu {
     }
 
     public showLayout() {
-
+        this.layout.showItem();
     }
 
     public getMinWidth(): number {

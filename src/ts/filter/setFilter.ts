@@ -82,7 +82,7 @@ export class SetFilter extends BaseFilter<string, ISetFilterParams, string[]> {
             (values:string[])=>this.setFilterValues(values, true, false),
             this.setLoading.bind(this)
         );
-        // this.virtualList.setModel(new ModelWrapper(this.model));
+        this.virtualList.setModel(new ModelWrapper(this.model));
         _.setVisible(<HTMLElement>this.getGui().querySelector('#ag-mini-filter'), !this.filterParams.suppressMiniFilter);
 
         this.eMiniFilter.value = this.model.getMiniFilter();

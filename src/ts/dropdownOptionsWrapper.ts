@@ -63,4 +63,19 @@ export class DropDownOptionsWrapper {
     }
 
     public getContext() { return this.dropdownOptions.context; }
+
+    public getLocaleTextFunc() {
+        if (this.dropdownOptions.localeTextFunc) {
+            return this.dropdownOptions.localeTextFunc;
+        }
+        let that = this;
+        return function (key: any, defaultValue: any) {
+            let localeText = that.dropdownOptions.localeText;
+            if (localeText && localeText[key]) {
+                return localeText[key];
+            } else {
+                return defaultValue;
+            }
+        };
+    }
 }

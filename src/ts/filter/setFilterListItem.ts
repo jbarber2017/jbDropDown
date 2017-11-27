@@ -85,7 +85,8 @@ export class SetFilterListItem extends Component {
     
         public render(): void {
     
-            // let valueElement = this.queryForHtmlElement(".ag-filter-value");
+            let valueElement = this.queryForHtmlElement(".ag-filter-value");
+            valueElement.innerHTML = this.value;
     
             //  let valueFormatted = this.valueFormatterService.formatValue(this.column, null, null, this.value);
     

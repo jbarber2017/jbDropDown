@@ -2,6 +2,7 @@ import {Component} from '../widgets/component';
 import {IFilterParams, IDoesFilterPassParams} from '../interfaces/iFilter';
 import {QuerySelector} from '../widgets/componentAnnotations';
 import {Context, Autowired} from '../context/context';
+import { DropDownOptionsWrapper } from '../dropdownOptionsWrapper';
 import {Utils as _} from '../utils';
 
 export interface Comparator<T>{
@@ -48,17 +49,12 @@ export abstract class BaseFilter<T, P extends IFilterParams, M> extends Componen
     defaultFilter:string;
     filter:string;
 
-    @QuerySelector('#applyPanel')
-    private eButtonsPanel: HTMLElement;
+    @QuerySelector('#applyPanel') private eButtonsPanel: HTMLElement;
+    @QuerySelector('#applyButton') private eApplyButton: HTMLElement;
+    @QuerySelector('#clearButton') private eClearButton: HTMLElement;
 
-    @QuerySelector('#applyButton')
-    private eApplyButton: HTMLElement;
-
-    @QuerySelector('#clearButton')
-    private eClearButton: HTMLElement;
-
-    @Autowired('context')
-    public context: Context;
+    @Autowired('context') public context: Context;
+    @Autowired('dropdownOptionsWrapper') dropdownOptionsWrapper: DropDownOptionsWrapper;
 
     public init(params: P): void {
         this.filterParams = params;
@@ -177,9 +173,9 @@ export abstract class BaseFilter<T, P extends IFilterParams, M> extends Componen
     }
 
     public translate(toTranslate:string):string {
-        return "";
-        //let translate = this.gridOptionsWrapper.getLocaleTextFunc();
-        //return translate(toTranslate, DEFAULT_TRANSLATIONS[toTranslate]);
+
+        let translate = this.dropdownOptionsWrapper.getLocaleTextFunc();
+        return translate(toTranslate, DEFAULT_TRANSLATIONS[toTranslate]);
     }
 }
 

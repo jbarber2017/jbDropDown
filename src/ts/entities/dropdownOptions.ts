@@ -8,11 +8,14 @@ export interface DropDownOptions {
     showCheckSelection?: boolean;
     //dropDownMode?: DropdownMode;
     buttonText?: string;
-    items: any[];
+    values: any[];
+    filterParams?: any;
     api?: DropDownApi;
     onDropDownReady?(event?: any): void;
     postProcessPopup?:(params: PostProcessPopupParams)=>void;
     getDocument?: ()=> Document;
+    localeText?: any;
+    localeTextFunc?: Function;
 }
 
 export interface PostProcessPopupParams {

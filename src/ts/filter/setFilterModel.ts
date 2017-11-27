@@ -1,5 +1,5 @@
 import {Utils as _} from "../utils";
-import {ISetFilterParams} from '../interfaces/iSetFilterParams';
+import {ISetFilterParams, SetFilterValuesFunc, SetFilterValuesFuncParams} from '../interfaces/iSetFilterParams';
 import {TextFilter, TextFormatter} from './textFilter';
 import {IFilterParams} from "../interfaces/iFilter";
 
@@ -55,7 +55,7 @@ export class SetFilterModel {
             //     this.inMemoryRowModel = <InMemoryRowModel> rowModel;
             // }
     
-            //this.filterParams = this.colDef.filterParams ? <ISetFilterParams> this.colDef.filterParams : <ISetFilterParams>{};
+            this.filterParams =  filterParams;//this.colDef.filterParams ? <ISetFilterParams> this.colDef.filterParams : <ISetFilterParams>{};
             if (_.exists(this.filterParams) && _.exists(this.filterParams.values)) {
                 this.valuesType =  Array.isArray(this.filterParams.values)?
                                             SetFilterModelValuesType.PROVIDED_LIST :
@@ -124,12 +124,31 @@ export class SetFilterModel {
         }
     
         private createAllUniqueValues() {
-            let valuesToUse: string[] = this.extractValuesToUse();
-            this.setValues(valuesToUse);
+            if (this.areValuesSync()) {
+                let valuesToUse: string[] = this.extractSyncValuesToUse();
+                this.setValues(valuesToUse);
+            } else {
+                this.isLoadingFunc(true);
+                this.setValues([]);
+                let callback = <SetFilterValuesFunc> this.filterParams.values;
+                let params: SetFilterValuesFuncParams = {
+                    success:this.onAsyncValuesLoaded.bind(this)
+                };
+                callback(params);
+            }
         }
     
         public setUsingProvidedSet (value:boolean){
             this.usingProvidedSet = value;
+        }
+
+        private onAsyncValuesLoaded(values:string[]): void {
+            this.modelUpdatedFunc(values);
+            this.isLoadingFunc(false);
+        }
+        
+        private areValuesSync() {
+            return this.valuesType == SetFilterModelValuesType.PROVIDED_LIST || this.valuesType == SetFilterModelValuesType.NOT_PROVIDED;
         }
     
         private setValues(valuesToUse: string[]) {
@@ -139,10 +158,17 @@ export class SetFilterModel {
             }
         }
     
-        private extractValuesToUse() {
+        private extractSyncValuesToUse() {
             let valuesToUse: string[];
-            if (this.usingProvidedSet) {
-                valuesToUse = _.toStrings(this.filterParams.values);
+            if (this.valuesType == SetFilterModelValuesType.PROVIDED_LIST) {
+                if(Array.isArray(this.filterParams.values)){
+                    valuesToUse = _.toStrings(<string[]>this.filterParams.values);
+                } else {
+                    // In this case the values are async but have already been resolved, so we can reuse them
+                    valuesToUse = this.allUniqueValues;
+                }
+            } else if (this.valuesType == SetFilterModelValuesType.PROVIDED_CB){
+                throw Error (`ag-grid: Error extracting values to use. We should not extract the values synchronously when using a callback for the filterParams.values`);
             } else {
                 let uniqueValuesAsAnyObjects = this.getUniqueValues(false);
                 valuesToUse = _.toStrings(uniqueValuesAsAnyObjects);
@@ -178,37 +204,59 @@ export class SetFilterModel {
             let uniqueCheck = <any>{};
             let result = <any>[];
     
-            if (!this.rowModel.forEachLeafNode) {
+            if (!this.filterParams.values) {
                 console.error('ag-Grid: Set Filter cannot initialise because you are using a row model that does not contain all rows in the browser. Either use a different filter type, or configure Set Filter such that you provide it with values');
-                return [];
+                return [];   
             }
+            // if (!this.rowModel.forEachLeafNode) {
+            //     console.error('ag-Grid: Set Filter cannot initialise because you are using a row model that does not contain all rows in the browser. Either use a different filter type, or configure Set Filter such that you provide it with values');
+            //     return [];
+            // }
     
-            this.rowModel.forEachLeafNode( (node: any)=> {
-                if (!node.group) {
-                    let value = this.valueGetter(node);
-    
-                    // if (this.colDef.keyCreator) {
-                    //     value = this.colDef.keyCreator( {value: value} );
-                    // }
-    
-                    if (value === "" || value === undefined) {
-                        value = null;
-                    }
-    
-                    if (filterOutNotAvailable) {
-                        if (!this.doesRowPassOtherFilters(node)) {
-                            return;
-                        }
-                    }
-    
-                    if (value != null && Array.isArray(value)) {
-                        for (let j = 0; j < value.length; j++) {
-                            addUniqueValueIfMissing(value[j])
-                        }
-                    } else {
-                        addUniqueValueIfMissing(value)
+            //this.rowModel.forEachLeafNode( (node: any)=> {
+            _.iterateObject(this.filterParams.values, (key, value) => {
+                if(value === "" || value === undefined) {
+                    value = null;
+                }
+
+                if(filterOutNotAvailable) {
+                    if(!this.doesRowPassOtherFilters()) {
+                        return;
                     }
                 }
+
+                if(value != null && Array.isArray(value)) {
+                    for(let j = 0; j < value.length; j++) {
+                        addUniqueValueIfMissing(value[j]);
+                    }
+                } else {
+                    addUniqueValueIfMissing(value);
+                }
+                // if (!node.group) {
+                //     let value = this.valueGetter(node);
+    
+                //     // if (this.colDef.keyCreator) {
+                //     //     value = this.colDef.keyCreator( {value: value} );
+                //     // }
+    
+                //     if (value === "" || value === undefined) {
+                //         value = null;
+                //     }
+    
+                //     if (filterOutNotAvailable) {
+                //         if (!this.doesRowPassOtherFilters(node)) {
+                //             return;
+                //         }
+                //     }
+    
+                //     if (value != null && Array.isArray(value)) {
+                //         for (let j = 0; j < value.length; j++) {
+                //             addUniqueValueIfMissing(value[j])
+                //         }
+                //     } else {
+                //         addUniqueValueIfMissing(value)
+                //     }
+                // }
             });
     
             function addUniqueValueIfMissing(value: any) {

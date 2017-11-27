@@ -25,6 +25,7 @@ export { ExpressionService } from "./dist/lib/valueService/expressionService";
 export { LoggerFactory } from "./dist/lib/logger";
 export { IMenuFactory } from "./dist/lib/interfaces/iMenuFactory";
 export { DropDownOptions, PostProcessPopupParams } from "./dist/lib/entities/dropdownOptions";
+export { ISetFilterParams, SetFilterValues, SetFilterValuesFunc, SetFilterValuesFuncParams } from "./dist/lib/interfaces/iSetFilterParams";
 export { IAfterGuiAttachedParams, IComponent } from "./dist/lib/interfaces/iComponent";
 export { IFilter, IFilterComp } from "./dist/lib/interfaces/iFilter";
 export { WrapableInterface } from "./dist/lib/components/framework/frameworkComponentWrapper";
